@@ -93,5 +93,5 @@
 <br>
 
 <div align="center">
-  <sub>Proyecto creado como parte de la especialización técnica SMR.</sub>
+  <sub>"Proyecto de laboratorio personal: Experimentación con interfaces dinámicas y lógica de sistemas."</sub>
 </div>
