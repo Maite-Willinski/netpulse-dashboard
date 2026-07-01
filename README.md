@@ -1,57 +1,84 @@
-# ✨ NetPulse | Suite de Infraestructura y Operaciones (SysOps & SecOps)
+<div align="center">
+  <table width="100%">
+    <tr>
+      <td align="center" style="background: linear-gradient(135deg, #2e0854 0%, #4a148c 40%, #7c4dff 100%); padding: 55px 20px; border-radius: 16px; border: 1px solid #7c4dff;">
+        <h1 style="color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; font-size: 3.1em; text-shadow: 4px 4px 8px rgba(0,0,0,0.6); letter-spacing: 1px;">NetPulse Dashboard</h1>
+        <p style="color: #e040fb; font-size: 1.25em; margin-top: 12px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">Suite de Infraestructura y Operaciones</p>
+        <p style="color: #b39ddb; font-size: 1.05em; margin-top: 5px; font-style: italic;">"Monitorización, orquestación y seguridad en un entorno de alta fidelidad."</p>
+        <br>
+        <img src="https://img.shields.io/badge/Estado-En_Desarrollo-b39ddb?style=for-the-badge&labelColor=121212" alt="Status" />
+      </td>
+    </tr>
+  </table>
+</div>
 
-NetPulse es un **Dashboard Prototipo de Alta Fidelidad** diseñado para la monitorización e interacción con infraestructuras de red y servicios de sistemas ligeros. El proyecto fusiona una interfaz web moderna y minimalista con una lógica interactiva que simula las tareas del día a día en administración de redes, ciberseguridad perimetral y orquestación de sistemas.
+<br>
 
-Desarrollado de forma nativa (Vanilla Architecture) para garantizar la máxima ligereza, legibilidad de código y una experiencia de usuario fluida tanto en modo claro como oscuro.
+<h1 align="center">Monitorización, Orquestación y Resiliencia 👋 ✨</h1>
 
----
+<p align="center">
+  NetPulse es un <strong>Dashboard de simulación SysOps/SecOps</strong> diseñado para la gestión integral de infraestructuras ligeras. El proyecto fusiona una interfaz moderna "Cozy-Tech" con una lógica interactiva compleja, permitiendo recrear tareas de administración real en un entorno controlado.
+</p>
 
-## 🛠️ Características Principales y Funcionalidades
+<hr style="border: 0; height: 3px; background: linear-gradient(to right, rgba(74, 20, 140, 0), #9575cd, rgba(179, 157, 219, 0)); margin: 35px 0;">
 
-### 1. Monitorización de Nodos y Recursos (SysOps)
-* **Estado en Tiempo Real:** Control visual del rendimiento crítico (CPU, Almacenamiento NAS) con componentes reactivos dinámicos.
-* **Métrica de Red Activa:** Gráfica de líneas interactiva (desarrollada con *Chart.js*) que simula las fluctuaciones del tráfico de datos en Mbps.
-* **Historial de Eventos:** Sistema centralizado de logs globales para la auditoría de acciones del sistema.
+## 📊 Métricas de Operaciones
 
-### 2. Orquestación y Control de Microservicios
-* **Docker Engine Simulator:** Panel interactivo para el control de estados de contenedores (`running`, `starting`, `exited`). Permite aislar, apagar y reiniciar microservicios críticos como entornos web (`Nginx`) o réplicas de bases de datos (`MySQL`).
-* **Systemd Daemon Control:** Gestión simulada de servicios nativos del sistema operativo de fondo (`ssh.service`, `isc-dhcp-server`).
+<table width="100%" align="center">
+  <tr>
+    <td align="center" width="25%" style="background-color: #1a1a2e; border-radius: 8px; padding: 15px; border: 1px solid #4a148c;">
+      <h3 style="color: #b39ddb; margin: 0;">🐳 Docker</h3>
+      <p style="font-size: 1.5em; font-weight: bold; margin: 10px 0; color: #fff;">3</p>
+      <small style="color: #888;">Contenedores activos</small>
+    </td>
+    <td align="center" width="25%" style="background-color: #1a1a2e; border-radius: 8px; padding: 15px; border: 1px solid #4a148c;">
+      <h3 style="color: #b39ddb; margin: 0;">🛡️ Firewall</h3>
+      <p style="font-size: 1.5em; font-weight: bold; margin: 10px 0; color: #fff;">Active</p>
+      <small style="color: #888;">Reglas Iptables</small>
+    </td>
+    <td align="center" width="25%" style="background-color: #1a1a2e; border-radius: 8px; padding: 15px; border: 1px solid #4a148c;">
+      <h3 style="color: #b39ddb; margin: 0;">📊 Tráfico</h3>
+      <p style="font-size: 1.5em; font-weight: bold; margin: 10px 0; color: #fff;">Realtime</p>
+      <small style="color: #888;">Chart.js dynamic</small>
+    </td>
+    <td align="center" width="25%" style="background-color: #1a1a2e; border-radius: 8px; padding: 15px; border: 1px solid #4a148c;">
+      <h3 style="color: #b39ddb; margin: 0;">📦 Backup</h3>
+      <p style="font-size: 1.5em; font-weight: bold; margin: 10px 0; color: #fff;">Done</p>
+      <small style="color: #888;">Snapshots (.tar.gz)</small>
+    </td>
+  </tr>
+</table>
 
-### 3. Gestión de Red Local y Diagnóstico (LAN)
-* **Mapeo de la VLAN:** Tabla dinámica con base de datos local que simula asignaciones DHCP Leases y tablas ARP (Direcciones IP y MAC Address). Incluye un **buscador predictivo en tiempo real**.
-* **Simulador ICMP (Ping):** Herramienta integrada con manejo de asincronía para recrear peticiones eco-request y respuestas de consola de comandos con latencia realista.
+<hr style="border: 0; height: 3px; background: linear-gradient(to right, rgba(74, 20, 140, 0), #9575cd, rgba(179, 157, 219, 0)); margin: 35px 0;">
 
-### 4. Ciberseguridad y Resiliencia (SecOps)
-* **Firewall Perimetral (Iptables/Fail2ban):** Módulo de mitigación que monitoriza IPs maliciosas detectadas en ataques de fuerza bruta o escaneos Nmap, permitiendo aplicar acciones `DROP` o levantamiento de bloqueos (`Unban`) desde la interfaz.
-* **Políticas de Resguardo:** Automatización simulada de empaquetados del sistema de archivos (`/etc` y `/var` en formato `.tar.gz`) con barras de carga reactivas.
-* **Lógica de Catástrofe (Botón de Pánico):** Simulación global de fallos en cascada. Al activarse, recrea un corte general de energía o ataque ransomware: tumba los demonios de Docker, los servicios del sistema, congela métricas y bloquea la interfaz mostrando errores de red tradicionales (`Network is unreachable`).
+## 🚀 Módulos Funcionales
 
----
+- 🖥️ **SysOps Control:** Monitorización en tiempo real de recursos y servicios base.
+- 🐳 **Docker Engine Simulator:** Panel interactivo para el control del ciclo de vida de microservicios.
+- 🔌 **LAN & ARP Mapper:** Mapeo de red con filtrado inteligente.
+- 🚨 **SecOps & Resilience:** Gestión de firewall y simulación global de caídas mediante "Botón de Pánico".
 
-## 🎨 Decisiones de Diseño y Estética
+<hr style="border: 0; height: 3px; background: linear-gradient(to right, rgba(74, 20, 140, 0), #9575cd, rgba(179, 157, 219, 0)); margin: 35px 0;">
 
-El proyecto implementa una línea de diseño funcional con un enfoque visual limpio y minimalista:
-* **Paleta de Colores Pastel:** Uso de tonos malvas, lilas suaves y detalles azul cielo y rosa para mitigar la carga visual de los paneles de administración tradicionales.
-* **Diseño SPA (Single Page Application):** Navegación fluida entre módulos sin recarga de página mediante manipulación limpia del DOM.
-* **Dual Theme:** Soporte completo para Modo Claro y Modo Oscuro con persistencia de datos local (`localStorage`).
+## 🛠️ Stack Tecnológico
 
----
+<table align="center" width="100%">
+  <tr>
+    <td align="center" width="50%" valign="top">
+      <h3>🌐 Frontend & Lógica</h3>
+      <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JS" /><br><br>
+      <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="Chart.js" />
+    </td>
+    <td align="center" width="50%" valign="top">
+      <h3>⚙️ Entorno & Despliegue</h3>
+      <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" /><br><br>
+      <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+    </td>
+  </tr>
+</table>
 
-## 🚀 Tecnologías Utilizadas
+<br>
 
-* **HTML5:** Estructuración semántica y accesible de la suite.
-* **CSS3:** Maquetación basada en CSS Grid, Flexbox, variables dinámicas para temas y animaciones fluidas de estado.
-* **JavaScript (Vanilla JS):** Arquitectura basada en eventos, manejo del DOM, control de temporizadores asíncronos y lógica de estado global.
-* **Chart.js:** Biblioteca externa cargada vía CDN para el renderizado del tráfico de red.
-
----
-
-## 📂 Estructura del Repositorio
-
-```text
-├── css/
-│   └── style.css      # Estilos globales, variables pastel y animaciones
-├── js/
-│   └── main.js        # Lógica de estados, simulación de datos y eventos DOM
-├── index.html         # Estructura principal de la SPA
-└── README.md          # Documentación técnica del proyecto
+<div align="center">
+  <sub>Proyecto creado como parte de la especialización técnica SMR.</sub>
+</div>
