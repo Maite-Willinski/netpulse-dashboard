@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetPulse | Suite de Infraestructura</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <div class="dashboard-container">
+        <!-- BARRA LATERAL -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="logo">
+                    <span class="icon">✨</span>
+                    <h2>NetPulse</h2>
+                </div>
+                <nav class="menu">
+                    <a href="#" class="menu-btn active" data-target="vision-general">📊 Visión General</a>
+                    <a href="#" class="menu-btn" data-target="servidores">🖥️ Servidores y Docker</a>
+                    <a href="#" class="menu-btn" data-target="dispositivos">🔌 Dispositivos LAN</a>
+                    <a href="#" class="menu-btn" data-target="herramientas">🛡️ Herramientas y Seguridad</a>
+                </nav>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button id="panic-btn" class="panic-btn">🚨 Simular Caída</button>
+                <button id="theme-toggle" class="theme-btn">🎨 Cambiar Tema</button>
+                <p class="signature">Maite Willinski</p>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="welcome-text">
+                    <h1 id="page-title">Estado de la Red Local</h1>
+                    <p id="page-subtitle">Monitorización en tiempo real de la infraestructura ligera.</p>
+                </div>
+                <div class="current-status-badge">
+                    <span class="dot pulse" id="global-dot"></span> <span id="global-status">Red Estable</span>
+                </div>
+            </header>
+
+            <!-- PESTAÑA 1: VISIÓN GENERAL -->
+            <div id="vision-general" class="tab-content active">
+                <section class="cards-grid">
+                    <div class="status-card" id="card-ubuntu">
+                        <div class="card-header">
+                            <h3>Servidor Principal (Ubuntu)</h3>
+                            <span class="badge online" id="badge-ubuntu">Online</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="ip-text">IP: 192.168.1.10</p>
+                            <div class="progress-container">
+                                <label>Uso de CPU: <span id="cpu-val">24%</span></label>
+                                <div class="progress-bar"><div class="progress" id="cpu-bar" style="width: 24%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="status-card" id="card-nas">
+                        <div class="card-header">
+                            <h3>Almacenamiento NAS</h3>
+                            <span class="badge online" id="badge-nas">Online</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="ip-text">IP: 192.168.1.20</p>
+                            <div class="progress-container">
+                                <label>Espacio en Disco: <span id="disk-val">68%</span></label>
+                                <div class="progress-bar"><div class="progress" id="disk-bar" style="width: 68%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dashboard-details">
+                    <div class="details-card chart-section">
+                        <h3>Tráfico de Red Reciente</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="networkChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="details-card logs-section">
+                        <h3>Registro de Eventos Globales</h3>
+                        <div class="logs-container" id="logs-wrapper">
+                            <div class="log-item info">
+                                <span class="log-dot"></span>
+                                <div class="log-info">
+                                    <p class="log-msg">Copia de seguridad semanal completada con éxito.</p>
+                                    <span class="log-time">Hace 10 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- PESTAÑA 2: SERVIDORES Y ORQUESTRADOR DOCKER -->
+            <div id="servidores" class="tab-content">
+                <section class="details-card">
+                    <h3>🐳 Orquestador de Contenedores (Docker Engine)</h3>
+                    <p class="tab-placeholder-text">Administración de microservicios aislados y entornos virtuales.</p>
+                    <div class="docker-container-list">
+                        <div class="docker-card" id="dk-wp">
+                            <div class="dk-info">
+                                <div class="dk-title">🌐 <strong>cms-wordpress-prod</strong></div>
+                                <span class="srv-badge online" id="status-dk-wp">running</span>
+                            </div>
+                            <div class="dk-actions">
+                                <button class="dk-btn stop" onclick="controlContainer('wp', 'stop')">⏹️ Stop</button>
+                                <button class="dk-btn start hidden" onclick="controlContainer('wp', 'start')">▶️ Start</button>
+                                <button class="dk-btn restart" onclick="controlContainer('wp', 'restart')">🔄</button>
+                            </div>
+                        </div>
+
+                        <div class="docker-card" id="dk-db">
+                            <div class="dk-info">
+                                <div class="dk-title">🗄️ <strong>mysql-db-replica</strong></div>
+                                <span class="srv-badge online" id="status-dk-db">running</span>
+                            </div>
+                            <div class="dk-actions">
+                                <button class="dk-btn stop" onclick="controlContainer('db', 'stop')">⏹️ Stop</button>
+                                <button class="dk-btn start hidden" onclick="controlContainer('db', 'start')">▶️ Start</button>
+                                <button class="dk-btn restart" onclick="controlContainer('db', 'restart')">🔄</button>
+                            </div>
+                        </div>
+
+                        <div class="docker-card" id="dk-proxy">
+                            <div class="dk-info">
+                                <div class="dk-title">🛡️ <strong>nginx-reverse-proxy</strong></div>
+                                <span class="srv-badge online" id="status-dk-proxy">running</span>
+                            </div>
+                            <div class="dk-actions">
+                                <button class="dk-btn stop" onclick="controlContainer('proxy', 'stop')">⏹️ Stop</button>
+                                <button class="dk-btn start hidden" onclick="controlContainer('proxy', 'start')">▶️ Start</button>
+                                <button class="dk-btn restart" onclick="controlContainer('proxy', 'restart')">🔄</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="details-card">
+                    <h3>Control de Servicios Base (Systemd Daemon)</h3>
+                    <p class="tab-placeholder-text">Administración directa de políticas e infraestructura locales del sistema operativo.</p>
+                    <div class="services-grid">
+                        <div class="service-panel-card" id="srv-ssh">
+                            <div class="srv-info">
+                                <strong>ssh.service (OpenSSH Server)</strong>
+                                <span class="srv-badge online" id="status-ssh">running</span>
+                            </div>
+                            <button class="srv-action-btn" onclick="restartService('ssh')">🔄 Reiniciar</button>
+                        </div>
+                        <div class="service-panel-card" id="srv-nginx">
+                            <div class="srv-info">
+                                <strong>nginx.service (Web Server Forward)</strong>
+                                <span class="srv-badge online" id="status-nginx">running</span>
+                            </div>
+                            <button class="srv-action-btn" onclick="restartService('nginx')">🔄 Reiniciar</button>
+                        </div>
+                        <div class="service-panel-card" id="srv-dhcp">
+                            <div class="srv-info">
+                                <strong>isc-dhcp-server.service</strong>
+                                <span class="srv-badge online" id="status-dhcp">running</span>
+                            </div>
+                            <button class="srv-action-btn" onclick="restartService('dhcp')">🔄 Reiniciar</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- PESTAÑA 3: DISPOSITIVOS LAN -->
+            <div id="dispositivos" class="tab-content">
+                <section class="details-card">
+                    <h3>Dispositivos Conectados a la VLAN Local</h3>
+                    <p class="tab-placeholder-text">Mapeo dinámico de la tabla ARP e IPs asignadas por DHCP lease.</p>
+                    
+                    <div class="table-search-box">
+                        <input type="text" id="lan-search" placeholder="🔍 Filtrar por IP, nombre o MAC Address...">
+                    </div>
+
+                    <table class="lan-table" id="lan-table">
+                        <thead>
+                            <tr>
+                                <th>Dispositivo</th>
+                                <th>Dirección IP</th>
+                                <th>MAC Address</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lan-table-body">
+                            <tr>
+                                <td>PC-Maqueta-01</td>
+                                <td>192.168.1.50</td>
+                                <td>00:1A:2B:3C:4D:5E</td>
+                                <td><span class="table-dot online"></span> Conectado</td>
+                            </tr>
+                            <tr>
+                                <td>Impresora-Laser</td>
+                                <td>192.168.1.100</td>
+                                <td>00:1A:2B:6F:7G:8H</td>
+                                <td><span class="table-dot online"></span> Conectado</td>
+                            </tr>
+                            <tr>
+                                <td>Proxmox-Node-02</td>
+                                <td>192.168.1.15</td>
+                                <td>00:8C:FA:32:BC:11</td>
+                                <td><span class="table-dot online"></span> Conectado</td>
+                            </tr>
+                            <tr>
+                                <td>Router-Gateway</td>
+                                <td>192.168.1.1</td>
+                                <td>CC:4E:24:88:9F:AA</td>
+                                <td><span class="table-dot online"></span> Conectado</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+
+            <!-- PESTAÑA 4: HERRAMIENTAS Y SEGURIDAD -->
+            <div id="herramientas" class="tab-content">
+                <div class="dashboard-details">
+                    
+                    <div class="flex-column-gap">
+                        <section class="details-card tool-box">
+                            <h3>Simulador de Diagnóstico ICMP (Ping)</h3>
+                            <form id="ping-form" class="ping-form">
+                                <input type="text" id="ping-input" placeholder="Ej: 192.168.1.1 o google.com" required>
+                                <button type="submit" class="theme-btn action-btn">Lanzar</button>
+                            </form>
+                            <div id="ping-loader" class="ping-loader hidden"><div class="spinner"></div></div>
+                            <div id="ping-result" class="ping-result-box hidden"><pre id="ping-terminal-text"></pre></div>
+                        </section>
+
+                        <section class="details-card security-box">
+                            <h3>🔒 Auditoría y Ciberseguridad (Fail2ban/Iptables)</h3>
+                            <p class="tab-placeholder-text">Direcciones IP sospechosas bloqueadas por intentos fallidos de SSH.</p>
+                            <div class="bad-ips-list">
+                                <div class="ip-row" id="bad-ip-1">
+                                    <span class="bad-ip-text">🚨 185.220.101.5 (Ataque Fuerza Bruta)</span>
+                                    <button class="ban-btn active-ban" onclick="toggleBan('1')">Unban</button>
+                                </div>
+                                <div class="ip-row" id="bad-ip-2">
+                                    <span class="bad-ip-text">🚨 45.132.22.19 (Scanner Nmap)</span>
+                                    <button class="ban-btn active-ban" onclick="toggleBan('2')">Unban</button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="details-card backup-section">
+                        <h3>🗄️ Políticas de Resguardo y Bases de Datos</h3>
+                        <p class="tab-placeholder-text">Sincronización de bases de datos relacionales y empaquetado del sistema de archivos (.tar.gz).</p>
+                        
+                        <div class="db-replica-card">
+                            <div class="replica-status">
+                                <strong>Estatus Réplica MySQL:</strong>
+                                <span class="badge online" id="replica-badge">Master-Slave OK</span>
+                            </div>
+                        </div>
+
+                        <div class="backup-actions-container">
+                            <button id="backup-btn" class="theme-btn" style="width: 100%; margin-top: 15px;">📦 Generar Backup Crítico del Sistema</button>
+                            
+                            <div id="backup-progress-wrapper" class="progress-container hidden" style="margin-top: 20px;">
+                                <label>Empaquetando directorios /etc y /var... <span id="backup-percent">0%</span></label>
+                                <div class="progress-bar"><div class="progress" id="backup-bar" style="width: 0%"></div></div>
+                            </div>
+                            
+                            <div id="backup-success-msg" class="backup-box-done hidden">
+                                🔒 backup_system_snapshot.tar.gz subida exitosamente al almacenamiento NAS seguro.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
