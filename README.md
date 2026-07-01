@@ -6,7 +6,9 @@
         <p style="color: #e040fb; font-size: 1.25em; margin-top: 12px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">Suite de Infraestructura y Operaciones</p>
         <p style="color: #b39ddb; font-size: 1.05em; margin-top: 5px; font-style: italic;">"Monitorización, orquestación y seguridad en un entorno de alta fidelidad."</p>
         <br>
-        <img src="https://img.shields.io/badge/Estado-En_Desarrollo-b39ddb?style=for-the-badge&labelColor=121212" alt="Status" />
+        <a href="https://maite-willinski.github.io/netpulse-dashboard/" target="_blank">
+          <img src="https://img.shields.io/badge/Demo-%F0%9F%94%97_Ver_Sitio_En_Vivo-ff79c6?style=for-the-badge&labelColor=121212&color=b39ddb" alt="Live Demo" />
+        </a>
       </td>
     </tr>
   </table>
